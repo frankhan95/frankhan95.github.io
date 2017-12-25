@@ -1,0 +1,170 @@
+<!doctype html>
+<head>
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Permanent+Marker" rel="stylesheet">
+	<link rel ="stylesheet" href="main.css"></link>
+</head>
+
+<body>
+	<div id ="initialize">
+		<div class="loader"></div>
+	</div>
+	<div id = "left_container">
+		<div class = "left_panel" id = "corner_header">FTC</div>
+		<ul id = "navi_panel" class = "left_panel">
+			<li id ="navi_home">home</li>
+			<li id ="navi_skills">skills</li>
+			<li id ="navi_portfolio">portfolio</li>
+			<li id ="navi_blog">blog</li>
+			<li id ="navi_contact">contact</li>
+		</ul>
+	</div>
+	<div id = "right_container">
+
+		<!-- Home Page -->
+		<div id = "landing_container">
+			<div id ="mapContainer"></div>
+				<div id = "greet">
+					<h1>Hi, I'm Frank<br></h1>
+					<h3>
+					<span>programmer and analyst passionate about data and visualization</span>
+					</h3>
+					<br>
+					<br>
+					<h3>
+					I write code and tools to process data and help those who make descisions based on it
+					</h3>
+					<br>
+					<br>
+					<h3>
+					...and I make some neat interactive projects on the side!
+					</h3>
+				</div>
+		</div>
+
+		<div id = "skill_container">
+			<svg id = "hexCanvas"></svg>
+			<div id = "skill_list">
+				<ul id = "languages"><h2>Languages</h2> <br>
+					<li class = "ToolsHex DatabaseHex">Java</li>
+					<li class = "GISHex WebDevHex ToolsHex DatabaseHex VisualizationsHex">Javascript (vanilla, D3, jQuery) </li>
+					<li class = "GISHex WebDevHex ToolsHex DatabaseHex">Python</li>
+					<li class = "ToolsHex GameDevHex">C#</li>
+					<li class = "DatabaseHex WebDevHex">PHP</li>
+					<li class = "GISHex WebDevHex DatabaseHex">SQL/MySQL/SQLite</li>
+					<li class = "GISHex WebDevHex ToolsHex">HTML</li>
+					<li class = "GISHex WebDevHex VisualizationsHex">CSS</li>
+				</ul>
+				<ul id = "software"><h2>Software</h2> <br>
+					<li class = "GISHex DatabaseHex ToolsHex">ArcGIS Desktop / Online</li>
+					<li class = "GISHex VisualizationsHex">OpenStreetMap</li>
+					<li class = "GISHex VisualizationsHex">Tableau</li>
+					<li class = "GISHex VisualizationsHex">Fulcrum</li>
+					<li class = "GISHex DatabaseHex">SPSS Statistics</li>
+					<li class = "WebDevHex DatabaseHex">Azure</li>
+					<li class = "GISHex VisualizationsHex">Mircrosoft Office (Access, Excel, Word, Powerpoint)</li>
+					<li class = "GameDevHex">Visual Studio 2015</li>
+					<li class = "GameDevHex">Unity3D</li>
+					<li class = "GISHex WebDevHex VisualizationsHex ">Photoshop / Illustrator CS6</li>
+				</ul>
+			</div>
+		</div>
+
+		<!-- Portfolio -->
+
+		<div id = "portfolio_container">
+			<div class = "portfolio_item">
+				<h1>NBR Maritime Awareness Project</h1>
+				<img src="screenshots/nbr_map.png" alt="Smiley face" class = "portfolio_image">
+				<div class = "portfolio_text">
+					<p></p>
+				</div>
+			</div>
+			<div class = "portfolio_item">
+				<h1>Python Script Tool for CSV and Feature Classes</h1>
+				<img src="screenshots/csv_tool.png" class = "portfolio_image">
+				<div class = "portfolio_text">
+					<p>ArcMap has no native support for CSV files, which is problematic when mass CSV files  need to be converted to geographic layers. <br>An ArcMap script tool that merges a  folder of CSV files and converts it into a  single dbf table. The tool has parameters to create point layers or line layers in the process. <br><br>The code is available here.</p>
+				</div>
+			</div>
+			<div class = "portfolio_item">
+				<h1>UW Game Dev Club Site</h1>
+				<img src="screenshots/gdc_site.png" class = "portfolio_image">
+				<div class = "portfolio_text">
+					<p>A website, made with no libraries, for the Game Development Club at the University of Washington. The site is a hub for announcements, club related information, resources, and student made games. <br> I also implemented a PHP based Content Management System (CMS) to help future officers and admins to easily update site content. <br><br>The code is available here.</p>
+				</div>
+			</div>
+			<div class = "portfolio_item">
+				<h1>Int'l District Art (Seattle)</h1>
+				<img src="screenshots/idistrict_carto.png" class = "portfolio_image">
+				<div class = "portfolio_text">
+					<p>An interactive map that shows the various public art pieces in the international district. Details for the artwork sis available by clicking on the various point locations.
+					<br>
+					Geocode using Field Papers and Github (gist). Data collection using Fulcrum. Visual Display using Carto.</p>
+				</div>
+			</div>
+			<div class = "portfolio_item">
+				<h1>Tennis Court Spatial Pattern and Median Income, Correlation?</h1>
+				<img src="screenshots/tennis_courts.png" class = "portfolio_image">
+				<div class = "portfolio_text">
+					<p>Residents in areas of higher average median income (darker shades) do not have to travel as far to access a tennis court compared to residents of lower average median income.</p>
+				</div>
+			</div>
+			<div class = "portfolio_item">
+				<h1>Unnamed Prototype</h1>
+				<img src="screenshots/space_game.png" class = "portfolio_image">
+				<div class = "portfolio_text">
+					<p>My first big game development project. Learned a lot about game design, networking, and most importantly, failure. In short, two novice game devs should not be aiming for a triple-A level, space-shooter MMO.Since, I've worked on many more games and failed at even more games. Failure is good because it means I'm learning.</p>
+				</div>
+			</div>
+			<div class = "portfolio_item">
+				<h1>Water Quality in WRIA 8, King County (WA)</h1>
+				<img src="screenshots/water_qual.png" class = "portfolio_image">
+				<div class = "portfolio_text">
+					<p>Darker shades show higher "restoration potential," areas that are more effective for investment. These areas also happen to be the less populated areas.</p>
+				</div>
+			</div>
+			<div class = "portfolio_item">
+				<h1>Comparing US poverty levels in 2003 and in 2013 (Tableau)</h1>
+				<img src="screenshots/poverty_tableau.png" class = "portfolio_image">
+				<div class = "portfolio_text">
+					<p></p>
+				</div>
+			</div>
+			<div class = "portfolio_item">
+				<h1>Assault Occurrences in Seattle (2010)</h1>
+				<img src="screenshots/assault_seattle.png" class = "portfolio_image">
+				<div class = "portfolio_text">
+					<p>By calculating Moran's I for the following categories: <br><br>Contiguity edges only <br> Contiguity edges and corners <br> Inverse Distance<br>Inverse Distance Squarted<br><br>Showed cluteried patterns of assault occurrences. <br>By calculating the General G for the same categories, results showed high clustering.</p>
+				</div>
+			</div>
+			<div class = "portfolio_item">
+				<h1>Choropleth of Carbon Emissions Per Capita</h1>
+				<img src="screenshots/carbon_map.png" class = "portfolio_image">
+				<div class = "portfolio_text">
+					<p></p>
+				</div>
+			</div>
+			
+		</div>
+
+		<div id = "blog_container">
+			- work in progress -
+		</div>
+
+		<div id = "contact_container">
+			<img src ="email.png">
+			<div>frankhan95 at gmail dot com</div>
+		</div>
+		
+	</div>
+	<img id = "loading" src="loading.gif" display ="none">
+	<script src="https://d3js.org/d3.v4.min.js"></script>
+	<script src="https://d3js.org/d3-timer.v1.min.js"></script>
+	<script src="https://d3js.org/topojson.v2.min.js"></script>
+	<script src="globe.js"></script>
+	<script src="hexagon_script.js"></script>
+	<script src="jquery-3.2.1.min.js"></script>
+	<script src="navigation.js"></script>
+
+</body>
