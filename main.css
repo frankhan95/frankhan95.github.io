@@ -19,13 +19,24 @@ a, #navi_panel {
 	background-color: #e8e8e8;
 	text-align: center;
 	padding-top: 5vh;
-	padding-bottom: 5vh;
-	height: 10vh;
+	height: 25vh;
 	margin: 0;
 	font-size: 80px;
 	font-family: 'Permanent Marker', cursive;
 }
 
+#corner_header img{
+	border-radius:50%;
+}
+
+#corner_caption {
+	font-size: 20px;
+	font-family: 'Roboto', sans-serif;
+	text-align: center;
+}
+#corner_caption span {
+	color: #969696;
+}
 #navi_panel {
 	background-color: #e8e8e8;
 	margin: 0;
@@ -117,6 +128,7 @@ h1 {
 	margin-top: 12vh;
 	border-bottom: solid;
 	margin-bottom: 1vh;
+	font-family: 'Roboto Mono', monospace;
 
 }
 

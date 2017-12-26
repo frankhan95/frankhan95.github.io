@@ -28,8 +28,6 @@
 		.attr("d", path)
     .attr("class", "land");
 	});
-  return;
-
 
   //Initialize map rotation
   var autorotate, now, diff, roation;
