@@ -26,6 +26,8 @@ a, #navi_panel {
 }
 
 #corner_header img{
+	border: 2px solid white;
+	width: 65%;
 	border-radius:50%;
 }
 
@@ -227,6 +229,10 @@ h2{
 /* Handle on hover */
 #portfolio_container::-webkit-scrollbar-thumb:hover {
     background: #16788c; 
+}
+
+.portfolio_text p a, .portfolio_text span  {
+	color:#2bf4ff;
 }
 
 #loading, #skill_container, #landing_container, #blog_container, #contact_container, #left_container, #right_container {
