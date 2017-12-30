@@ -1,18 +1,32 @@
 $(document).ready(function() {
 	//$("#portfolio_container").delay(1000).slideDown(1000);
 	var isTransition = false;
+	var minWidth = 600;
 	$transitionTime = 1000;
 	$activeContent = $("#landing_container");
+	$("#close_nav").on('click', function() {
+		closeNavBar();
+	});
+	$("#open_nav").on('click', function() {
+		$("#left_container").delay($transitionTime).css("width", "200px");
+		$("#close_nav").delay($transitionTime).css("display", "block");
+	});
 	startLandingPage();
+	//$("#left_container").delay($transitionTime).css("width", "200px");
 	$("#right_container").css("display", "block");
 	$("#left_container").css("display", "block");
 	$('#initialize').delay(1500).fadeTo(500, 0, function() {
 		$('#initialize').css("display", "none");
 	})
 
+	function closeNavBar() {
+		$("#left_container").css("width", "0px");
+		$("#close_nav").delay($transitionTime).css("display", "none");
+	}
+
 	function startLandingPage() {
-		$("#left_container").slideUp();
-		$("#left_container").slideDown(100);
+		// $("#left_container").slideUp();
+		// $("#left_container").slideDown(100);
 		$("#greet").delay($transitionTime).fadeTo(0, 0.0);
 		$activeContent = $("#landing_container").stop().slideDown(100, function(){isTransition = false});
 		$("#greet").delay($transitionTime).stop().fadeTo(1000, 1.0);
@@ -57,6 +71,9 @@ $(document).ready(function() {
 			$("#greet").fadeTo(0, 0.0);
 			$activeContent.stop().slideUp($transitionTime);
 			$activeContent.removeClass('activeContent');
+		}
+		if($(window).width() < 600){
+			closeNavBar();
 		}
 	}
 
