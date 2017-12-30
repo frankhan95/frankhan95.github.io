@@ -68,8 +68,11 @@ a, #navi_panel {
 
 #skill_list {
 	float: left;
-	margin:4%;
-	margin-left: 10%;
+	margin-top: 4%;
+}
+
+#skill_container {
+	overflow: auto;
 }
 
 .right_content, #skill_container {
@@ -77,8 +80,8 @@ a, #navi_panel {
 	margin-bottom: 15vh;
 	margin-top: 15vh;
 
-	margin-left: 10%;
-	margin-right: 10%;
+	margin-left: 0%;
+	margin-right: 0%;
 }
 
 h1 {
@@ -212,22 +215,26 @@ h2{
 	text-align: left;
 }
 
-#portfolio_container::-webkit-scrollbar {
+#portfolio_container::-webkit-scrollbar, 
+#skill_container::-webkit-scrollbar {
     width: 5px;
 }
 
 /* Track */
-#portfolio_container::-webkit-scrollbar-track {
+#portfolio_container::-webkit-scrollbar-track,
+#skill_container::-webkit-scrollbar-track {
     background: #1c1c1c; 
 }
  
 /* Handle */
-#portfolio_container::-webkit-scrollbar-thumb {
+#portfolio_container::-webkit-scrollbar-thumb,
+#skill_container::-webkit-scrollbar-thumb  {
     background: #2bf4ff; 
 }
 
 /* Handle on hover */
-#portfolio_container::-webkit-scrollbar-thumb:hover {
+#portfolio_container::-webkit-scrollbar-thumb:hover, 
+#skill_container::-webkit-scrollbar-thumb:hover {
     background: #16788c; 
 }
 
