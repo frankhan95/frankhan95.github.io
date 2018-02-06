@@ -10,7 +10,9 @@
 	<div id ="initialize">
 		<div class="loader"></div>
 	</div>
-	<div id = "open_nav"></div>
+	<div id = "open_nav">
+		<img src = "hamburger_icon.png">
+	</div>
 	<div id = "left_container">
 		<div id = "close_nav"></div>
 		<div class = "left_panel" id = "corner_header"><img src ="profile_photo.png"><div id = "corner_caption">Frank Han <br> <span>frankhan95 at gmail</span></div></div>
@@ -19,7 +21,7 @@
 			<li id ="navi_skills">skills</li>
 			<li id ="navi_portfolio">portfolio</li>
 			<li id ="navi_blog" style ="display: none">blog</li>
-			<li id ="navi_contact">contact</li>
+			<li id ="navi_project">projects</li>
 		</ul>
 	</div>
 	<div id = "right_container">
@@ -29,19 +31,18 @@
 			<div id ="mapContainer"></div>
 				<div id = "greet">
 					<h1>Hi,I'm Frank<br></h1>
-					<h3>
-					<span>programmer and analyst passionate about data and visualization</span>
-					</h3>
-					<br>
-					<br>
-					<h3>
-					I write code and tools to process data and help those who make decisions based on it
-					</h3>
-					<br>
-					<br>
-					<h3>
-					...and I make some neat interactive projects on the side!
-					</h3>
+					<div id = "intro">
+						<h3>
+						<span>programmer / analyst passionate about data</span>
+						</h3>
+						<br>
+						<h3>
+						I write code and tools to process data and help those who make decisions based on it
+						<br>
+						<br>
+						...and I make some neat interactive projects on the side!
+						</h3>
+					</div>
 				</div>
 		</div>
 
@@ -87,14 +88,21 @@
 				<h1>Python Script Tool for CSV and Feature Classes</h1>
 				<img src="screenshots/csv_tool.png" class = "portfolio_image">
 				<div class = "portfolio_text">
-					<p><span>ArcPy tool to help import CSV files </span><br><br>ArcMap has no native support for CSV files, which is problematic when mass CSV files  need to be converted to geographic layers. <br>I wrote this ArcPy script tool that merges a  folder of CSV files and converts it into a  single dbf table. The tool has parameters to create point layers or line layers, streamlining the process. <br><br>The code is available here.</p>
+					<p><span>ArcPy tool to help import CSV files </span><br><br>ArcMap has no native support for CSV files, which is problematic when mass CSV files  need to be converted to geographic layers. <br>I wrote this ArcPy script tool that merges a  folder of CSV files and converts it into a  single dbf table. The tool has parameters to create point layers or line layers, streamlining the process.</p>
 				</div>
 			</div>
 			<div class = "portfolio_item">
-				<h1>UW Game Dev Club Site</h1>
-				<img src="screenshots/gdc_site.png" class = "portfolio_image">
+				<h1>NOAA Tropical Storm Web Scrape Tool</h1>
+				<img src="screenshots/noaa_tool.png" class = "portfolio_image">
 				<div class = "portfolio_text">
-					<p><span>A website, made with no libraries, for the Game Development Club at the University of Washington.</span><br><br> The site is a hub for announcements, club related information, resources, and student made games. <br> I also implemented a PHP based Content Management System (CMS) to help future officers and admins to easily update site content. <br><br>Link: <a href="http://www.uwgamedev.com">uwgamedev.com</a><br><br>The code is available here.</p>
+					<p><span>A web scrape tool that converts NOAA archives into .csv.</span><br><br>National Oceanic and Atmospheric Administration holds archival data about tropical storms. Because the data is presented in unfriendly, unreadable format, this tool scapes and parses text off their site into easily downloadable csv files. This internal tool was used to streamline the rebuilding of a tropical storm database. </p>
+				</div>
+			</div>
+			<div class = "portfolio_item">
+				<h1>Tennis Court Spatial Pattern</h1>
+				<img src="screenshots/tennis_courts.png" class = "portfolio_image">
+				<div class = "portfolio_text">
+					<p><span>Can tennis courts be an indicator of median income? </span><br><br> Created thessien/voronoi polygons surronding tennis courts in Seattle and performed statistical practices. Results showed a correlation! Residents in areas of higher average median income (darker shades) do not have to travel as far to access a tennis court compared to residents of lower average median income.</p>
 				</div>
 			</div>
 			<div class = "portfolio_item">
@@ -106,20 +114,7 @@
 					Geocode was performed using Field Papers and Github (gist). Data collection using Fulcrum. Visual Display using Carto.</p>
 				</div>
 			</div>
-			<div class = "portfolio_item">
-				<h1>Tennis Court Spatial Pattern</h1>
-				<img src="screenshots/tennis_courts.png" class = "portfolio_image">
-				<div class = "portfolio_text">
-					<p><span>Can tennis courts be an indicator of median income? </span><br><br> Created thessien/voronoi polygons surronding tennis courts in Seattle and performed statistical practices. Results showed a correlation! Residents in areas of higher average median income (darker shades) do not have to travel as far to access a tennis court compared to residents of lower average median income.</p>
-				</div>
-			</div>
-			<div class = "portfolio_item">
-				<h1>Unnamed Prototype</h1>
-				<img src="screenshots/space_game.png" class = "portfolio_image">
-				<div class = "portfolio_text">
-					<p><span>A multiplayer, space-themed dogfighter.</span> <br><br> This project was my very first attempt at trying to 'make it big' in game developement. Of course, it was never finalized but I learned a lot about game design, networking, and most importantly, scope. In short, two novice game devs should not be aiming for a triple-A level, space-shooter MMO. This important lesson has helped finish more projects and games since!</p>
-				</div>
-			</div>
+			
 			<div class = "portfolio_item">
 				<h1>Water Quality in WRIA 8, King County (WA)</h1>
 				<img src="screenshots/water_qual.png" class = "portfolio_image">
@@ -141,13 +136,7 @@
 					<p> <span>A statistical investigation on the spatial distribution of assault in Seattle.</span><br><br> Calculated Moran's I for the following categories: <br><br>-Contiguity edges only <br>-Contiguity edges and corners <br>-Inverse Distance<br>-Inverse Distance Squarted<br><br>And found clustered patterns of assault occurrences. <br>Furthermore, the General G for the same categories, showed high intensity of clustering.</p>
 				</div>
 			</div>
-			<div class = "portfolio_item">
-				<h1>NOAA Tropical Storm Web Scrape Tool</h1>
-				<img src="screenshots/noaa_tool.png" class = "portfolio_image">
-				<div class = "portfolio_text">
-					<p><span>A web scrape tool that converts NOAA archives into .csv.</span><br><br>National Oceanic and Atmospheric Administration holds archival data about tropical storms. Because the data is presented in unfriendly, unreadable format, this tool scapes and parses text off their site into easily downloadable csv files. This internal tool was used to streamline the rebuilding of a tropical storm database. </p>
-				</div>
-			</div>
+			
 			
 		</div>
 
@@ -155,13 +144,24 @@
 			- sorry, work in progress -
 		</div>
 
-		<div id = "contact_container">
-			<img src ="email.png">
-			<div>frankhan95 at gmail dot com</div>
+		<div id = "project_container">
+			<div class = "portfolio_item">
+				<h1>UW Game Dev Club Site</h1>
+				<img src="screenshots/gdc_site.png" class = "portfolio_image">
+				<div class = "portfolio_text">
+					<p><span>A website, made with no libraries, for the Game Development Club at the University of Washington.</span><br><br> The site is a hub for announcements, club related information, resources, and student made games. <br> I also implemented a PHP based Content Management System (CMS) to help future officers and admins to easily update site content. <br><br>Link: <a href="http://www.uwgamedev.com">uwgamedev.com</a></p>
+				</div>
+			</div>
+			<div class = "portfolio_item">
+				<h1>Unnamed Prototype</h1>
+				<img src="screenshots/space_game.png" class = "portfolio_image">
+				<div class = "portfolio_text">
+					<p><span>A multiplayer, space-themed dogfighter.</span> <br><br> This project was my very first attempt at trying to 'make it big' in game developement. Of course, it was never finalized but I learned a lot about game design, networking, and most importantly, scope. In short, two novice game devs should not be aiming for a triple-A level, space-shooter MMO. This important lesson has helped finish more projects and games since!</p>
+				</div>
+			</div>
 		</div>
 		
 	</div>
-	<img id = "loading" src="loading.gif" display ="none">
 	<script src="https://d3js.org/d3.v4.min.js"></script>
 	<script src="https://d3js.org/d3-timer.v1.min.js"></script>
 	<script src="https://d3js.org/topojson.v2.min.js"></script>

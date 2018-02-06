@@ -60,7 +60,7 @@ a, #navi_panel {
 	color: #16788c;
 	transition: 0.3s;
 	position: fixed;
-	z-index: 1;
+	z-index: 0;
 
 }
 
@@ -95,31 +95,30 @@ h1 {
 }
 
 #open_nav {
-	width: 60px;
     position: fixed;
-    text-align: center;
-    background-image: url(hamburger_icon.png);
-    background-repeat: no-repeat;
-    padding-top: 50px;
-    padding-bottom: 50px;
-    background-size: 60px 70px;
-    margin-left: 10px;
+    text-align: right;
+    width: 100%;
+    background-color: black; 
+    display: none;
+}
+
+#open_nav img{
+	height: 40px;
+	margin-right: 10px;
 }
 
 #close_nav{
     width: 30px;
     height: 30px;
-    position: fixed;
    	margin-top: 5px;
-    top: 5px;
-    left: 165px;
     display: none;
+    float: right;
     background-image: url(exit_icon.png);
     background-repeat: no-repeat;
     background-size: 30px 30px;
 }
 
-#portfolio_container {
+#portfolio_container, #project_container {
 	display: none;
 	overflow: scroll;
 	overflow-x: hidden;
@@ -138,7 +137,7 @@ h1 {
 .portfolio_text {
 	margin-right: 2%;
 	margin-top: 6%;
-
+    text-align: right;
 }
 
 .portfolio_image {
@@ -169,18 +168,23 @@ h1 {
 	font-size: 24px;
 	line-height: 200%;
 	font-style: normal;
-	font-weight: 800;
+	font-weight: 200;
 	margin: 0;
 	line-height: 110%;
 
 }
 
 #greet span {
-	color:#2bf4ff;
+	color: black;
+	font-weight: 600;
 
 }
 
-
+#intro {
+    background-color: white;
+    padding: 20px;
+    color:#444444;
+}
 
 #mapContainer svg {
 	background-color: #1c1c1c;
@@ -244,33 +248,37 @@ h2{
 }
 
 #portfolio_container::-webkit-scrollbar, 
-#skill_container::-webkit-scrollbar {
+#skill_container::-webkit-scrollbar,
+#project_container::-webkit-scrollbar {
     width: 5px;
 }
 
 /* Track */
 #portfolio_container::-webkit-scrollbar-track,
+#project_container::-webkit-scrollbar-track,
 #skill_container::-webkit-scrollbar-track {
     background: #1c1c1c; 
 }
  
 /* Handle */
 #portfolio_container::-webkit-scrollbar-thumb,
+#project_container::-webkit-scrollbar-thumb,
 #skill_container::-webkit-scrollbar-thumb  {
     background: #2bf4ff; 
 }
 
 /* Handle on hover */
 #portfolio_container::-webkit-scrollbar-thumb:hover, 
+#project_container::-webkit-scrollbar:hover,
 #skill_container::-webkit-scrollbar-thumb:hover {
     background: #16788c; 
 }
 
-.portfolio_text p a, .portfolio_text span  {
+.portfolio_text p a, .portfolio_text span {
 	color:#2bf4ff;
 }
 
-#loading, #skill_container, #landing_container, #blog_container, #contact_container, #left_container, #right_container {
+#loading, #skill_container, #landing_container, #blog_container, #project_container, #left_container, #right_container {
 	display: none;
 }
 
@@ -307,21 +315,6 @@ h2{
     width: 50%;
 }
 
-#blog_container, #contact_container {
-    font-size: 48px;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-}
-
-#contact_container {
-    margin-top: 30vh;
-}
-#contact_container img {
-	width: 15%;
-
-}
-
 .loader {
     border: 5px solid #f3f3f3; /* bg */
     border-top: 5px solid #16788c; /* highlight */
@@ -341,6 +334,7 @@ h2{
 @media screen and (max-width: 600px) {
 	#left_container {
 		width: 0;
+		z-index: 1;
 	}  
 
 	#right_container{
@@ -349,5 +343,8 @@ h2{
 
 	#greet h1{
 		margin-top: 0;
+	}
+	#open_nav{
+		display: block;
 	}
 }
