@@ -34,7 +34,7 @@
   var degPerSec = 6;
   var degPerMs = degPerSec / 1000;
   var lastTime = d3.now();
-  //autorotate = d3.timer(rotate);
+  autorotate = d3.timer(rotate);
 
   function rotate(elapsed) {
     now = d3.now();
