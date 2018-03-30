@@ -102,6 +102,8 @@
 		})
 		.classed("interestHexagons", true)
 		.attr("id", function(d){ return  d.interest.replace(/ /g,'')+"Poly";})
+		.attr("stroke", "#1c1c1c")
+		.attr("stroke-width", "5px");
 		
 		//Add Icons
 		var dimensions = size * .75;

@@ -45,6 +45,7 @@ a, #navi_panel {
 #skill_list {
 	float: left;
 	margin-top: 4%;
+	font-family: 'Roboto Mono', 'monospace';
 }
 
 #skill_container {
@@ -61,7 +62,7 @@ a, #navi_panel {
 }
 
 h1 {
-	color: black;
+	color: #1c1c1c;
 	margin-top: 0;
 }
 
@@ -173,7 +174,7 @@ h1 {
 	overflow: hidden;
 }
 
-.land, .skillHighlight {
+.land{
 	fill: #16788c;
 }
 
@@ -201,7 +202,7 @@ ul {
 
 h2{
 	margin: 0;
-	color:#c1c1c1;
+	color:#1c1c1c;
 }
 
 #languages{
@@ -233,8 +234,9 @@ h2{
 }
 
 
-.portfolio_text p a, .portfolio_text span {
+.portfolio_text p a, .portfolio_text span, .skillHighlight {
 	color:#16788c;
+	font-weight: 600
 }
 
 #loading, #skill_container, #landing_container, #blog_container, #project_container, #left_container, #right_container {
