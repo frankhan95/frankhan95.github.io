@@ -8,7 +8,7 @@
 	var bgRow = 2;
 	var hexFill = "white";
 	var hexStroke = "#e7e7e7";
-	var interestName = ["Database", "Web Dev", "Visualizations", "Tools", "Game Dev", "GIS"];
+	var interestName = ["Database", "Web Dev", "Visuals", "Tools", "Game Dev", "GIS"];
 	var iconNames = ["database_icon.png", "code_icon.png", "visual_icon.png", "tool_icon.png", "gamedev_icon.png", "map_icon.png"];
 
 	//SVG Configurations
@@ -28,7 +28,6 @@
 	var hexGroup = hexCanvas.append("g")
 		.attr("id", "hexGroup")
 		.attr("transform", "translate(" + x/2 + "," +(y/5) + ")");
-
 
 	formatInterestHexagons();
 	drawInterestHexagons();
@@ -63,24 +62,21 @@
 	function bindOnClick(){
 		d3.selectAll(".interestHexagons, image, text")
 		.on("mouseover", function(d) {
-			d3.select("#"+d.interest.replace(/ /g,'')+ " text")
-			.transition()
-			.duration(1000)
-			.style("opacity", 1.0);
-			d3.select("#"+d.interest.replace(/ /g,'')+ "BG")
-			.transition()
-			.duration(500)
-			.attr("stroke-width", "2px")
-			.attr("stroke", "#2bf4ff");
 			d3.selectAll("."+d.interest.replace(/ /g,'')+ "Hex")
 			.classed("skillHighlight", true);
-		})
-		.on("mouseout", function(d){
-			d3.select("#"+d.interest.replace(/ /g,'')+ "BG")
+
+			d3.select("#"+d.interest.replace(/ /g,'')+ "Poly")
 			.transition()
 			.duration(500)
-			.attr("stroke", hexStroke)
+			.attr("stroke", "green")
 			.attr("stroke-width", "20px");
+		})
+		.on("mouseout", function(d){
+			d3.select("#"+d.interest.replace(/ /g,'')+ "Poly")
+			.transition()
+			.duration(500)
+			.attr("stroke", "#1c1c1c")
+			.attr("stroke-width", "5px");
 			d3.selectAll("."+d.interest.replace(/ /g,'')+ "Hex")
 			.classed("skillHighlight", false);
 		});;
@@ -97,26 +93,6 @@
 		})
 		.classed("hexagonGroup", true);
 
-		/*var whiteBG = group.append("polygon")
-		.attr("points", function(d){
-			return d.pointList.map(function(d){
-				return [d.xPos, d.yPos + size/10].join(",");
-			}).join(" ");
-		})
-		.classed("staticHexBG", true)
-*/
-		//background
-		/*var background = group.append("polygon")
-		.attr("points", function(d){
-			return d.pointList.map(function(d){
-				return [d.xPos, d.yPos + size/10].join(",");
-			}).join(" ");
-		})
-		.classed("onClickHex", true)
-		.attr("id", function(d) { return d.interest.replace(/ /g,'')+"BG";})
-		.attr("stroke-width", "20px")
-		.attr("stroke", hexStroke);*/
-
 		//Add hexagons
 		group.append("polygon")
 		.attr("points", function(d){
@@ -125,6 +101,7 @@
 			}).join(" ");
 		})
 		.classed("interestHexagons", true)
+		.attr("id", function(d){ return  d.interest.replace(/ /g,'')+"Poly";})
 		
 		//Add Icons
 		var dimensions = size * .75;

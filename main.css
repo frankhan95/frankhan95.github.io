@@ -171,7 +171,7 @@ h1 {
 	overflow: hidden;
 }
 
-.land {
+.land, .skillHighlight {
 	fill: #16788c;
 }
 
@@ -197,10 +197,6 @@ h1 {
 
 ul {
   list-style-type: none;
-}
-
-.skillHighlight{
-	color: #2bf4ff;
 }
 
 h2{
