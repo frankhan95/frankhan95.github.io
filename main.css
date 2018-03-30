@@ -17,31 +17,7 @@ a, #navi_panel {
 	color: white;
 }
 
-#corner_header{
-	font-size: 20px;
-	/* background-color: #e8e8e8; */
-	text-align: center;
-	padding-top: 5vh;
-	height: 30vh;
-	margin: 0;
-	font-size: 80px;
-	font-family: 'Permanent Marker', cursive;
-}
 
-#corner_header img{
-	border: 2px solid white;
-	width: 65%;
-	border-radius:50%;
-}
-
-#corner_caption {
-	font-size: 20px;
-	font-family: 'Roboto', sans-serif;
-	text-align: center;
-}
-#corner_caption span {
-	color: #969696;
-}
 #navi_panel {
 	/* background-color: #e8e8e8; */
 	margin: 0;
