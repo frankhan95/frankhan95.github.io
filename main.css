@@ -187,12 +187,12 @@ h1 {
 
 .interestHexagons {
 	fill: white;
+    stroke: black;
+    stroke-width: 10px;
 }
 
-.staticHexBG{
-	fill:white;
-	stroke: black;
-	stroke-width: 10px;
+.hexagonText{
+	font-family: 'Roboto Mono', 'monospace';
 }
 
 ul {

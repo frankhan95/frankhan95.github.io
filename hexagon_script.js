@@ -97,14 +97,14 @@
 		})
 		.classed("hexagonGroup", true);
 
-		var whiteBG = group.append("polygon")
-		/*.attr("points", function(d){
+		/*var whiteBG = group.append("polygon")
+		.attr("points", function(d){
 			return d.pointList.map(function(d){
 				return [d.xPos, d.yPos + size/10].join(",");
 			}).join(" ");
-		})*/
+		})
 		.classed("staticHexBG", true)
-
+*/
 		//background
 		/*var background = group.append("polygon")
 		.attr("points", function(d){
@@ -127,7 +127,7 @@
 		.classed("interestHexagons", true)
 		
 		//Add Icons
-		/*var dimensions = size * .75;
+		var dimensions = size * .75;
 		group.append("svg:image")
 		.attr("xlink:href", function(d){
 			return "hexagon_icons/" + d.icon;
@@ -135,7 +135,7 @@
 		.attr("width", dimensions)
 		.attr("height", dimensions)
 		.attr("x", function(d){ return d.x - dimensions/2;})
-		.attr("y", function(d){ return d.y - dimensions * .6;});*/
+		.attr("y", function(d){ return d.y - dimensions * .6;});
 		
 		//Add Labels
 		var fontSize = toInt(size / 5) + "px";
@@ -148,11 +148,10 @@
 		})
 		.text(function(d) {return d.interest})
 		.attr("id", function(d) { return d.interest.replace(/ /g,'')+"Text";})
-		.attr("font-family", "sans-serif")
 		.attr("font-size", fontSize)
 		.attr("fill", "black")
 		.attr("text-anchor", "middle")
-		.style("opacity", 0.0);
+		.classed("hexagonText", true);
 
 	}
 
