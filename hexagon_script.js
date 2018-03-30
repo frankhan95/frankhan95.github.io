@@ -8,7 +8,6 @@
 	var bgRow = 2;
 	var hexFill = "white";
 	var hexStroke = "#e7e7e7";
-	var bgFill = "#1c1c1c";
 	var interestName = ["Database", "Web Dev", "Visualizations", "Tools", "Game Dev", "GIS"];
 	var iconNames = ["database_icon.png", "code_icon.png", "visual_icon.png", "tool_icon.png", "gamedev_icon.png", "map_icon.png"];
 
@@ -80,7 +79,7 @@
 			d3.select("#"+d.interest.replace(/ /g,'')+ "BG")
 			.transition()
 			.duration(500)
-			.attr("stroke", bgFill)
+			.attr("stroke", hexStroke)
 			.attr("stroke-width", "20px");
 			d3.selectAll("."+d.interest.replace(/ /g,'')+ "Hex")
 			.classed("skillHighlight", false);
@@ -114,7 +113,7 @@
 		.classed("onClickHex", true)
 		.attr("id", function(d) { return d.interest.replace(/ /g,'')+"BG";})
 		.attr("stroke-width", "20px")
-		.attr("stroke", bgFill);
+		.attr("stroke", hexStroke);
 		//Add hexagons
 		group.append("polygon")
 		.attr("points", function(d){
@@ -146,7 +145,7 @@
 		.attr("id", function(d) { return d.interest.replace(/ /g,'')+"Text";})
 		.attr("font-family", "sans-serif")
 		.attr("font-size", fontSize)
-		.attr("fill", hexStroke)
+		.attr("fill", "black")
 		.attr("text-anchor", "middle")
 		.style("opacity", 0.0);
 
