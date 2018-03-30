@@ -1,9 +1,12 @@
+
+
+
 body {
 	margin: 0;
 	font-family: 'Roboto', sans-serif;
-	background-color: #1c1c1c;
+	/* background-color: #1c1c1c; */
 	overflow: hidden;
-	min-width: 600px;
+	/*min-width: 600px;*/
 }
 
 a {
@@ -11,15 +14,15 @@ a {
 }
 
 a, #navi_panel {
-	color: #444444;
+	color: white;
 }
 
 #corner_header{
 	font-size: 20px;
-	background-color: #e8e8e8;
+	/* background-color: #e8e8e8; */
 	text-align: center;
 	padding-top: 5vh;
-	height: 25vh;
+	height: 30vh;
 	margin: 0;
 	font-size: 80px;
 	font-family: 'Permanent Marker', cursive;
@@ -40,36 +43,40 @@ a, #navi_panel {
 	color: #969696;
 }
 #navi_panel {
-	background-color: #e8e8e8;
+	/* background-color: #e8e8e8; */
 	margin: 0;
 	padding: 0;
 	text-align: center;
 	font-size: 20px;
 	height: 75vh;
 	padding-top: 5vh;
-
 }
 
 #left_container {
 	float: left;
 	overflow: hidden;
-	width: 16%;
+	width: 20%;
 	color: #16788c;
-
+	transition: 0.3s;
+	position: fixed;
+	z-index: 0;
+	background-color:  black;
 }
 
 #right_container {
-	float: right;
-	width: 84%;
 	color: #dbdbdb;
 	overflow: hidden;
+	padding-left: 20%;
 }
 
 
 #skill_list {
 	float: left;
-	margin:4%;
-	margin-left: 10%;
+	margin-top: 4%;
+}
+
+#skill_container {
+	overflow: auto;
 }
 
 .right_content, #skill_container {
@@ -77,16 +84,40 @@ a, #navi_panel {
 	margin-bottom: 15vh;
 	margin-top: 15vh;
 
-	margin-left: 10%;
-	margin-right: 10%;
+	margin-left: 0%;
+	margin-right: 0%;
 }
 
 h1 {
-	color: #ededed;
+	color: black;
 	margin-top: 0;
 }
 
-#portfolio_container {
+#open_nav {
+    position: fixed;
+    text-align: right;
+    width: 100%;
+    background-color: black; 
+    display: none;
+}
+
+#open_nav img{
+	height: 40px;
+	margin-right: 10px;
+}
+
+#close_nav{
+    width: 30px;
+    height: 30px;
+   	margin-top: 5px;
+    display: none;
+    float: right;
+    background-image: url(exit_icon.png);
+    background-repeat: no-repeat;
+    background-size: 30px 30px;
+}
+
+#portfolio_container, #project_container {
 	display: none;
 	overflow: scroll;
 	overflow-x: hidden;
@@ -105,7 +136,7 @@ h1 {
 .portfolio_text {
 	margin-right: 2%;
 	margin-top: 6%;
-
+    text-align: right;
 }
 
 .portfolio_image {
@@ -117,45 +148,51 @@ h1 {
 
 #greet{
 	position: absolute;
-	margin-left: 10%;
-	float: left;
 	width: 50%;
 	margin-top: 16vh;
-	margin-left: 15%;
+	margin-left: 10%;
 }
 
 #greet h1 {
 	font-size: 60px;
+	background-color: white;
 	margin: 0;
 	margin-top: 12vh;
-	border-bottom: solid;
+	border: 1px solid black;
+	/* border-bottom: 2px solid gold; */
+	padding: 20px;
 	margin-bottom: 1vh;
 	font-family: 'Roboto Mono', monospace;
-
 }
 
 #greet h3 {
 	font-size: 24px;
 	line-height: 200%;
 	font-style: normal;
-	font-weight: 800;
+	font-weight: 200;
 	margin: 0;
 	line-height: 110%;
 
 }
 
 #greet span {
-	color:#2bf4ff;
+	color: black;
+	font-weight: 600;
 
 }
 
-
+#intro {
+    background-color: white;
+    padding: 20px;
+    color:#444444;
+    border: 1px solid black;
+    font-family: 'Roboto Mono', monospace;
+}
 
 #mapContainer svg {
-	background-color: #1c1c1c;
+	/* background-color: #1c1c1c; */
 	width: 100%;
 	height: 100vh;
-
 }
 
 #mapContainer {
@@ -169,7 +206,7 @@ h1 {
 }
 
 #hexCanvas{
-	background-color: #1c1c1c;
+	/* background-color: #1c1c1c; */
 	float: left;
 	margin-top: 15%;
 	margin-left: 5%;
@@ -212,30 +249,38 @@ h2{
 	text-align: left;
 }
 
-#portfolio_container::-webkit-scrollbar {
+#portfolio_container::-webkit-scrollbar, 
+#skill_container::-webkit-scrollbar,
+#project_container::-webkit-scrollbar {
     width: 5px;
 }
 
 /* Track */
-#portfolio_container::-webkit-scrollbar-track {
+#portfolio_container::-webkit-scrollbar-track,
+#project_container::-webkit-scrollbar-track,
+#skill_container::-webkit-scrollbar-track {
     background: #1c1c1c; 
 }
  
 /* Handle */
-#portfolio_container::-webkit-scrollbar-thumb {
+#portfolio_container::-webkit-scrollbar-thumb,
+#project_container::-webkit-scrollbar-thumb,
+#skill_container::-webkit-scrollbar-thumb  {
     background: #2bf4ff; 
 }
 
 /* Handle on hover */
-#portfolio_container::-webkit-scrollbar-thumb:hover {
+#portfolio_container::-webkit-scrollbar-thumb:hover, 
+#project_container::-webkit-scrollbar:hover,
+#skill_container::-webkit-scrollbar-thumb:hover {
     background: #16788c; 
 }
 
-.portfolio_text p a, .portfolio_text span  {
+.portfolio_text p a, .portfolio_text span {
 	color:#2bf4ff;
 }
 
-#loading, #skill_container, #landing_container, #blog_container, #contact_container, #left_container, #right_container {
+#loading, #skill_container, #landing_container, #blog_container, #project_container, #left_container, #right_container {
 	display: none;
 }
 
@@ -257,9 +302,9 @@ h2{
 	padding-bottom: 40px;
 	width: 100%;
 	cursor: pointer;
-	border: 1px solid #e8e8e8;
+	/* border: 1px solid #e8e8e8; */
 	transition: border-color 1s;
-
+	font-family:  'Roboto Mono', monospace;
 }
 
 #navi_panel li:hover {
@@ -270,21 +315,6 @@ h2{
 #blog_container {
     margin-top: 45vh;
     width: 50%;
-}
-
-#blog_container, #contact_container {
-    font-size: 48px;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-}
-
-#contact_container {
-    margin-top: 30vh;
-}
-#contact_container img {
-	width: 15%;
-
 }
 
 .loader {
@@ -301,4 +331,22 @@ h2{
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+@media screen and (max-width: 600px) {
+	#left_container {
+		width: 0;
+		z-index: 1;
+	}  
+
+	#right_container{
+		padding-left: 0;
+	}
+
+	#greet h1{
+		margin-top: 0;
+	}
+	#open_nav{
+		display: block;
+	}
 }
