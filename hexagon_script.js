@@ -98,11 +98,11 @@
 		.classed("hexagonGroup", true);
 
 		var whiteBG = group.append("polygon")
-		.attr("points", function(d){
+		/*.attr("points", function(d){
 			return d.pointList.map(function(d){
 				return [d.xPos, d.yPos + size/10].join(",");
 			}).join(" ");
-		})
+		})*/
 		.classed("staticHexBG", true)
 
 		//background
@@ -116,7 +116,7 @@
 		.attr("id", function(d) { return d.interest.replace(/ /g,'')+"BG";})
 		.attr("stroke-width", "20px")
 		.attr("stroke", hexStroke);*/
-		
+
 		//Add hexagons
 		group.append("polygon")
 		.attr("points", function(d){
@@ -125,8 +125,9 @@
 			}).join(" ");
 		})
 		.classed("interestHexagons", true)
+		
 		//Add Icons
-		var dimensions = size * .75;
+		/*var dimensions = size * .75;
 		group.append("svg:image")
 		.attr("xlink:href", function(d){
 			return "hexagon_icons/" + d.icon;
@@ -134,7 +135,8 @@
 		.attr("width", dimensions)
 		.attr("height", dimensions)
 		.attr("x", function(d){ return d.x - dimensions/2;})
-		.attr("y", function(d){ return d.y - dimensions * .6;});
+		.attr("y", function(d){ return d.y - dimensions * .6;});*/
+		
 		//Add Labels
 		var fontSize = toInt(size / 5) + "px";
 		group.append("text")
