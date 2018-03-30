@@ -96,6 +96,7 @@
 			return d.interest.replace(/ /g,''); 
 		})
 		.classed("hexagonGroup", true);
+
 		var whiteBG = group.append("polygon")
 		.attr("points", function(d){
 			return d.pointList.map(function(d){
@@ -103,8 +104,9 @@
 			}).join(" ");
 		})
 		.classed("staticHexBG", true)
+
 		//background
-		var background = group.append("polygon")
+		/*var background = group.append("polygon")
 		.attr("points", function(d){
 			return d.pointList.map(function(d){
 				return [d.xPos, d.yPos + size/10].join(",");
@@ -113,7 +115,8 @@
 		.classed("onClickHex", true)
 		.attr("id", function(d) { return d.interest.replace(/ /g,'')+"BG";})
 		.attr("stroke-width", "20px")
-		.attr("stroke", hexStroke);
+		.attr("stroke", hexStroke);*/
+		
 		//Add hexagons
 		group.append("polygon")
 		.attr("points", function(d){
