@@ -36,7 +36,7 @@ a, #navi_panel {
 }
 
 #right_container {
-	color: #dbdbdb;
+	color: #a8a8a8;
 	overflow: hidden;
 	padding-left: 20%;
 }
@@ -107,8 +107,10 @@ h1 {
 
 .portfolio_text {
 	margin-right: 2%;
-	margin-top: 6%;
-    text-align: right;
+    text-align: center;
+    display: block;
+    float: right;
+    width: 50%;
 }
 
 .portfolio_image {
@@ -178,7 +180,7 @@ h1 {
 #hexCanvas{
 	float: left;
 	margin-top: 15%;
-	margin-left: 5%;
+	margin-left: 15%;
 }
 
 .onClickHex {
@@ -187,8 +189,6 @@ h1 {
 
 .interestHexagons {
 	fill: white;
-    stroke: black;
-    stroke-width: 10px;
 }
 
 .hexagonText{
@@ -201,7 +201,7 @@ ul {
 
 h2{
 	margin: 0;
-	color:white;
+	color:#c1c1c1;
 }
 
 #languages{
@@ -234,7 +234,7 @@ h2{
 
 
 .portfolio_text p a, .portfolio_text span {
-	color:#2bf4ff;
+	color:#16788c;
 }
 
 #loading, #skill_container, #landing_container, #blog_container, #project_container, #left_container, #right_container {

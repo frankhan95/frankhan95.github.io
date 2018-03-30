@@ -68,8 +68,8 @@
 			d3.select("#"+d.interest.replace(/ /g,'')+ "Poly")
 			.transition()
 			.duration(500)
-			.attr("stroke", "green")
-			.attr("stroke-width", "20px");
+			.attr("stroke", "#16788c")
+			.attr("stroke-width", "1px");
 		})
 		.on("mouseout", function(d){
 			d3.select("#"+d.interest.replace(/ /g,'')+ "Poly")
