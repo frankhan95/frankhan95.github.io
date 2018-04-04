@@ -1,0 +1,129 @@
+body{
+	margin: 0;
+	background-color: black;
+}
+
+#fdi_map {
+    display: block;
+    height: 77%;
+    /*background-color: #1b1b51;*/
+    background-color: white;
+    width: 100%;
+    border-radius: 5px;
+    cursor: move;
+
+}
+
+button{
+	/*background: linear-gradient(#b7b7b7,#939393); */
+	border: 2px solid white;
+    color: white;
+    /*padding: 5px 30px;*/
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    width: 100px;
+    height: 30px;
+    margin: 5px;
+    border-radius: 20px;
+    background: #820000;
+    -webkit-transition-duration: 0.2s; /* Safari */
+    transition-duration: 0.2s;
+    cursor: pointer;
+    
+}
+
+button:hover, button:active, .currYear{
+	/*background: linear-gradient(#606060,#606060);*/
+	background: white;
+	color: #820000;
+}
+
+#container {
+    width: 74%;
+    float: left;
+    display: block;
+    margin-left: 1%;
+}
+
+#container, #details{
+	height: 90vh;
+}
+
+#current_year, #country_name{
+	
+}
+
+#head{
+	height: 10vh;
+	width: 100%;
+	background-color: #820000;
+}
+
+#year{
+    overflow: hidden;
+    padding: 10px;
+    text-align: center;
+}
+
+body, #details{
+	background-color: #424242;
+}
+
+#summary_card {
+    height: 16vh;
+}
+
+#details{
+	float: right;
+	width: 23%;
+    margin-right: 1%;
+}
+
+#detail_text{
+    line-height: 10px;
+    font-size: 16px;
+}
+
+#country_card{
+	height: 15vh;
+    
+}
+
+.card {
+	background-color: white;
+	border-radius: 5px;
+    padding: .5vh;
+}
+
+#intro {
+    font-size: 20px;
+    color: white;
+    padding-top: 10px;
+    text-align: center;
+    font-family: arial;
+}
+
+#invest_card{
+	height: 51.1vh;
+}
+
+h2, .card p {
+	margin: 10px;
+	color: #424242;
+	font-family: Arial;
+}
+
+#head, #summary_card {
+    overflow: hidden;
+}
+
+#about_card, .card, svg{
+	margin-top: 1vh;
+}
+
+#about_card {
+    height: 16vh;
+    background: white;
+    border-radius: 5px;
+}

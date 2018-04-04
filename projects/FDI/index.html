@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Chinese Foreign Investments</title>
+   <link rel="stylesheet" type="text/css" href="main.css">
+  <style>
+
+  	.country{
+  		stroke: black;
+  		stroke-width: .5px;
+  	}
+    .country:hover{
+        stroke: #FFFF00;
+    }
+
+    .legendText{
+        font-size: 14px;
+        fill: #333333;
+    }
+
+    .country-boundary-inner {
+        fill: none;
+        stroke: #fff;
+        stroke-dasharray: 2,2;
+        stroke-linejoin: round;
+    }
+
+    .country-boundary-outer {
+        fill: none;
+        stroke: #efefef;
+        stroke-linejoin: round;
+    }
+    </style>
+</head>
+
+<body>
+    <div id = "head">
+        <div id ="intro">Proof of Concept: Cartogram of Chinese FDI by Year</div>
+        <div id = "year">
+            <button class = "yearUI" id="2010">2010</button>
+            <button class = "yearUI" id="2011">2011</button>
+            <button class = "yearUI" id="2012">2012</button>
+            <button class = "yearUI" id="2013">2013</button>
+            <button class = "yearUI" id="2014">2014</button>
+            <button class = "yearUI" id="2015">2015</button>
+            <button class = "yearUI" id="2016">2016</button>
+            <button class = "yearUI" id="2017">2017</button>
+            <button id="reverse">Reverse</button>
+
+        </div>
+    </div>
+
+    <div id="container">
+        <svg id = "fdi_map"></svg>
+        <div id = "about_card" class ="card">
+        <h2>About</h2><p>
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+        </div>
+   </div>
+        <div id = "details">
+        <div id = "summary_card" class = "card"><h2>Summary</h2> <p id = "summary_text"></p></div>
+        <div id = "country_card" class = "card"> 
+            <h2 id = "current_year">select a year</h2>
+            <h2 id = "country_name"> </h2>
+        </div>
+        <div id = "invest_card" class = "card">
+            <h2>Investment Details</h2>
+            <svg id= "pie_chart"></svg>
+            <p id = "detail_text"></p>
+        </div>
+    </div>
+
+
+<script src="lib/d3.v2.min.js" charset="utf-8"></script>
+<script src="lib/topojson.js"></script>
+<script src="lib/queue.js"></script>
+<script src="lib/cartogram.js"></script>
+
+
+<script>
+    var Default_Color = "#f7f7f7";
+
+    var sizeIsPercent = false;
+
+    var zoom = d3.behavior.zoom()
+    .translate([0, 0])
+    .scale(1)
+    .scaleExtent([1, 8])
+    .on("zoom", redraw);
+
+    var distort = d3.select("#distort"),
+    pieChart = d3.select("#pie_chart"),
+    svg = d3.select("#fdi_map").call(zoom),
+    proj = d3.geo.equirectangular().scale(1050),
+    path = d3.geo.path()
+        .projection(proj),
+    countries = svg.append("g")
+        .attr("id", "countries")
+        .attr("transform", "translate(20, 60)")
+        .selectAll("path"),
+    carto = d3.cartogram()
+        .projection(proj)
+        .properties(function(d) {
+            return d.properties; 
+        }),
+    mapData = d3.map(),
+    yearlyFDI = d3.map(),
+    sectorFDI = d3.map(),
+    countrySector = d3.map(),
+    geometries,
+    topology,
+    investScale,
+    avgAmount,
+    currentCountry = d3.select("#country_name"),
+    currentYear = d3.select("#current_year"),
+    detailText = d3.select('#detail_text'),
+    summaryText = d3.select('#summary_text'),
+    maxAmount = 0,
+    minAmount = Infinity,
+    year = 2016,
+    color = d3.scale.linear(),
+     t = proj.translate(),
+     s = proj.scale();
+
+
+json();
+getTotalFDIs();
+addColorLegend();
+
+
+function redraw() {
+    var centX = parseInt(svg.style("width")) / 2;
+    var centY = parseInt(svg.style("height")) / 2;
+    countries.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+}
+
+function ready() {
+	carto.iterations(6);
+    carto.value(function(d) {
+        var country = d.properties.name;
+        var amount;
+        if(sizeIsPercent){
+            amount = parseFloat(mapData[country]) / (yearlyFDI[country+year]);
+            if(amount == undefined || isNaN(amount) || amount == Infinity) {return 1;}
+        } else {
+            amount = mapData[d.properties.name]; 
+            if(yearlyFDI[country+year] == undefined || isNaN(mapData[country])) {return 1}
+        }
+        return investScale(amount);
+    })
+
+    countries.attr("fill", function(d) {
+        var country = d.properties.name;
+        var code = d.properties.code;
+        var amount;
+        if(sizeIsPercent){
+            amount = mapData[d.properties.name]; 
+            if(yearlyFDI[country+year] == undefined || isNaN(mapData[country])) {return Default_Color;}
+        } else {
+            amount = parseFloat(mapData[country]) / (yearlyFDI[country+year]);
+            if(amount == undefined || isNaN(amount) || amount == Infinity) {return Default_Color;}
+        }
+
+        return color(Number(amount)); 
+    });
+
+    countries.data(carto(topology, geometries).features);
+    countries.transition()
+        .attr("d", carto.path);
+	currentYear.html(year);
+
+}
+
+function do_normal() {
+	var features = carto.features(topology, geometries);
+	countries.data(features)
+    	.transition()
+        .duration(750)
+        .attr("d", path);
+}
+
+
+/*--------------------------------------------------------------------- */
+
+d3.selectAll(".yearUI")
+	.on("click", function() {
+		var currYearButton = d3.select(".currYear");
+		if(currYearButton != undefined){ currYearButton.classed("currYear", false);}
+		this.className = "currYear";
+		updateYear(this.id, false);
+        
+	})
+
+d3.select("#reverse")
+    .on("click", function() {
+        sizeIsPercent = !sizeIsPercent;
+        var update = sizeIsPercent ? "Size is %" : "Size is $";
+        d3.select(this).text(update);
+        updateYear(year, true);
+    })
+
+function getTotalFDIs(){
+	d3.csv("data/world_gdp.csv", function(data) {
+		data.forEach(function (gdp){
+			for(var i = 2010; i < 2017; i++){
+				var tempYear = i.toString();
+				if(yearlyFDI[gdp["Country Name"] + tempYear] == undefined){
+					yearlyFDI[gdp["Country Name"] + tempYear] = parseInt(Number(gdp[i.toString()]) / 1000000) || 0
+				} else {
+					yearlyFDI[gdp["Country Name"] + tempYear] += parseInt(Number(gdp[i.toString()]) / 1000000) || 0
+				}
+			}
+		})
+	});
+}
+
+
+function json() {
+    d3.json("data/world.json", function(data) {
+        topology = data
+        geometries = topology.objects.countries.geometries.filter(function(g){
+            return g.properties.name != "Antarctica";
+          });
+        var features = carto.features(topology, geometries)
+        countries = countries
+            .data(features)
+            .enter()
+            .append("path")
+            .attr("class", "country")
+            .attr("id", function(d){return d.properties.name;})
+            .attr("fill", Default_Color)
+            .attr("d", path)
+            .on("mouseover", function(d){
+            	var amount = (mapData[d.properties.name] || 0);
+            	if(amount < 1000) {	amount = amount + " million";} 
+                    else { amount = amount / 1000.0 + " billion";}        	
+
+            	var country = d.properties.name;
+            	var percent = mapData[country] / (yearlyFDI[country+year]);
+            	//console.log(d.properties.name +" percent: " +mapData[country] + " / " + yearlyFDI[country+year] + " = " + percent);
+            	percent *= 100;
+            	percent = Math.round(100 * percent) / 100;
+            	var percent_string = "";
+            	if(!isNaN(percent)){ percent_string = " (" + percent + "%)";}
+            	currentCountry.html(d.properties.name + ": <br> $" + amount + "<br>" +percent_string);
+                updatePieChart(countrySector, geoNames.get(d.Country) || d.properties.name);
+                detailText.html(sectorFDI[country]);
+
+            })
+            .on("mouseout", function(d){
+                currentCountry.html("");
+                detailText.html("");
+            });
+    })
+}
+
+var geoNames = d3.map();
+geoNames.set("USA", "United States");
+geoNames.set("UAE", "United Arab Emirates");
+geoNames.set("Russian Federation", "Russia");
+geoNames.set("Democratic Republic of the Congo", "Dem. Rep. Congo");
+geoNames.set("Equatorial Guinea", "Eq. Guinea");
+geoNames.set("Trinidad-Tobago", "Trinidad and Tobago");
+geoNames.set("Czech Republic", "Czech Rep.");
+geoNames.set("Bosnia", "Bosnia and Herz.");
+geoNames.set("South Sudan", "S. Sudan");
+geoNames.set("Ivory Coast", "C?te d'Ivoire");
+
+function csv(callback) {
+	maxAmount = 0;
+    minAmount = Infinity;
+
+    var maxCurrFDI = 0;
+    var minCurrFDI = Infinity;
+    var totalFDI = 0;
+    var country_count = 0;
+    var minCountry, maxCountry;
+    var minPerCountry, maxPerCountry;
+
+    d3.csv("data/chinese_investment.csv", function(data) {
+        data.forEach(function (d){
+        	var country = geoNames.get(d.Country) || d.Country;
+            if(parseInt(d.Year) != year){ return }
+    		country_count++;
+            var dollars = d['Quantity in Millions']; 
+            //Remove the $ sign and convert to int
+            var int_amount = parseInt(dollars.substring(1, dollars.length - 1).replace(/,/g, ''));
+            var update_amount = int_amount;
+            if(mapData[country] != null) { 
+            	update_amount += mapData[country];
+            	totalFDI += update_amount;
+            }
+            mapData[country] = update_amount;
+            if(update_amount > maxAmount){maxAmount = update_amount; maxCountry = country;}
+            if(update_amount < minAmount){minAmount = update_amount; minCountry = country;}
+
+            aggregateSectors(country, d.Sector, int_amount,countrySector);
+        });
+
+        constructDetailsStr(countrySector, sectorFDI);
+
+        data.forEach(function(d){
+        	var country = geoNames.get(d.Country) || d.Country;
+        	if(yearlyFDI[country+year] != undefined && yearlyFDI[country+year] > 0){
+            	var FDI_percent = mapData[country] / (yearlyFDI[country+year]);
+            	if(FDI_percent > maxCurrFDI) {maxCurrFDI = FDI_percent; maxPerCountry = country;}
+        		if(FDI_percent < minCurrFDI) {minCurrFDI = FDI_percent; minPerCountry = country;}
+            }
+
+        });
+        avgAmount = totalFDI/ Object.keys(mapData).length;
+        
+        var invest_text = "Dollar Amounts: <b>$" + moneyToString(minAmount) + "</b> (Multiple) " + "to <b>$" + moneyToString(maxAmount) + "</b> (" + maxCountry + ")";
+        var fdi_text = "FDI Range: <b>" + decimalToPercent(minCurrFDI) + "</b> ("+minPerCountry+") to <b>" + decimalToPercent(maxCurrFDI) + "</b> ("+maxPerCountry+")";
+        summaryText.html(invest_text + "<br><br>" + fdi_text);
+        
+        investScale = d3.scale.linear();
+        if(sizeIsPercent){
+            color.domain([minAmount, 5000,maxAmount])
+            .range(["#fee0d2","#cb181d","#820000"]); 
+
+            investScale.domain([minCurrFDI, maxCurrFDI])
+            .range([1, 500]);
+        } else {
+            color.domain([0, 0.01, .1, maxCurrFDI])
+            .range(["#fee0d2","#ff7c7c","#cb181d","#820000"]);
+
+            investScale.domain([minAmount, maxAmount])
+            .range([1, 750]);
+        }
+
+
+        var maxLegend = sizeIsPercent ? moneyToString(maxAmount) : decimalToPercent(maxCurrFDI);
+        var minLegend = sizeIsPercent ? moneyToString(minAmount) : decimalToPercent(minCurrFDI);
+
+        d3.select("#maxLegend").html(maxLegend);
+        d3.select("#minLegend").html(minLegend);  
+        callback()
+
+    });
+
+}
+
+
+
+
+
+/*-------------------------Helpers----------------------------------*/
+
+var pieColor = d3.scale.linear()
+        .domain([0, 1.57, 6.283])
+        .range(["#ffeda0","#feb24c","#820000"])
+
+function updatePieChart(countrySector, countryName){
+    var width = parseInt(pieChart.style("width"));
+    var height = parseInt(pieChart.style("height"));
+    pieChart.html("");
+    var arc = d3.svg.arc()
+        .outerRadius(height / 3)
+        .innerRadius(0);
+
+    var labelArc = d3.svg.arc()
+        .outerRadius(1000)
+        .innerRadius(500);
+
+    var labelr = 90;
+
+    var pie = d3.layout.pie()
+        .sort(null)
+        .value(function(d) {return countrySector[d]});
+
+    var pies = pieChart
+        .attr("width", "100%")
+        .attr("height", "" + 200 + "px")
+        .append("g")
+        .attr("transform", "translate(" + (width/2) +", " + (height/2) +")");
+    var g = pies.selectAll(".arc")
+        .data(pie(Object.keys(countrySector).filter(country => country.split('-')[0] == countryName)))
+        .enter().append("g").attr("class", "arc");
+
+    g.append("path")
+        .attr("d", arc)
+        .style("fill", function(d){ var deltaRad = d.endAngle - d.startAngle; return pieColor(deltaRad);});
+    g.append("text")
+        .attr("transform", function(d) { 
+            var c = arc.centroid(d),
+            x = c[0],
+            y = c[1],
+            // pythagorean theorem for hypotenuse
+            h = Math.sqrt(x*x + y*y);
+            return "translate(" + (x/h * labelr) +  ',' +  (y/h * labelr) +  ")"; 
+            //return "translate(" + labelArc.centroid(d) + ")";
+        })
+        .text(function(d) { return d.data.split("-")[1];})
+        .style("fill", "#424242")
+        .attr("text-anchor", function(d) {
+            // are we past the center?
+            return (d.endAngle + d.startAngle)/2 > Math.PI ? "end" : "start";
+        });
+}
+
+//Aggregate rows of FDI and sort by sector
+function aggregateSectors(country, sector, dollars, countrySector){
+    var sectorKey = country +"-"+ sector;
+    var sectorValue = dollars;
+    if (sectorKey in countrySector){sectorValue += countrySector[sectorKey]}
+    countrySector[sectorKey] = sectorValue;
+}
+
+//Convert sector FDI values into one string per country. This string will be
+//displayed as 'investment details.'
+function constructDetailsStr(countrySector, sectorFDI){
+    for (var key in countrySector) {
+        var country_str = key.split('-')[0];
+        var new_sector = key.split('-')[1] + ": $" +moneyToString(countrySector[key]);
+        if (country_str in sectorFDI) {new_sector = sectorFDI[country_str] + " <br><br>" +new_sector;}
+        sectorFDI[country_str] = new_sector;
+    }
+}
+
+function decimalToPercent(num) {
+    return (num*100).toFixed(3) + "%"
+}
+
+function addColorLegend(){
+    var defs = svg.append("defs");
+
+    var gradient = defs.append("linearGradient")
+       .attr("id", "svgGradient").attr("x1", "0%").attr("x2", "0%")
+        .attr("y1", "100%").attr("y2", "0%");
+    gradient.append("stop").attr('class', 'start').attr("offset", "0%")
+        .attr("stop-color", "#fee0d2").attr("stop-opacity", 1);
+    gradient.append("stop").attr('class', 'end').attr("offset", "100%")
+        .attr("stop-color", "#820000").attr("stop-opacity", 1);
+
+    var g = svg.append("g").attr("class", "key").attr("transform", "translate(100, 350)");
+    g.append('rect').attr("width", 10).attr("height", 100).attr("x", 10)
+        .attr("y", 10).attr("fill", "url(#svgGradient)");
+    g.append('text').attr("id", "maxLegend").attr('class', "legendText")
+        .attr("x", -5).attr("y", 00).html("Max");
+    g.append('text').attr("id", "minLegend").attr('class', "legendText").attr("x", -5)
+        .attr("y", 125).html("Min");
+}
+
+function moneyToString(amount) {
+    return (amount < 1000) ? amount + " million" : amount / 1000.0 + " billion";
+}
+
+function updateYear(newYear, isRevert) {
+	if(year === newYear && !isRevert) {return;}
+	do_normal();	
+	year = newYear;
+	currentYear.html("loading...");
+	mapData = d3.map();
+    countrySector = d3.map();
+    sectorFDI = d3.map();
+	setTimeout(function(){
+		queue()
+        .defer(csv)
+        .awaitAll(ready);
+    }, 500)
+}
+</script>
+</body>
+
+</html>
+
+
