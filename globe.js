@@ -1,6 +1,6 @@
 (function() {
 
-	var width = 1000, height = 600, sens = 0.25;
+	var width = window.innerWidth, height = window.innerHeight, sens = 0.25;
   var angles = { x: 120, y: -40, z: 0}
 
   //Reference to svg
